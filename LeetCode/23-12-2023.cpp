@@ -19,6 +19,10 @@ public:
             if(visited.find(x) != visited.end()){
                 if(visited[x].find(y) != visited[x].end()) {
                     // cout << x << ", " << y << "TRUE" << endl;
+                    
+                    // ========= I don't know why adding this line reduces the time for running to 0ms....
+                    // cout << ((int) *visited[x].find(y)) << endl;
+
                     return true;
                 }
             }
