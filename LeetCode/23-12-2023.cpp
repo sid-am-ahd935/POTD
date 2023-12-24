@@ -1,5 +1,6 @@
 // ***    1496. Path Crossing    *** //
 
+/*
 class Solution {
 public:
     bool isPathCrossing(string path) {
@@ -27,6 +28,35 @@ public:
                 }
             }
             visited[x].insert(y);
+        }
+        return false;
+    }
+};
+*/
+
+// New solution
+
+class Solution {
+public:
+    bool isPathCrossing(string path) {
+        unordered_set<string> visited;
+        int x = 0, y = 0;
+
+        visited.insert("0-0");
+        for(char c:path) {
+            switch(c) {
+                case 'N': y += 1; break;
+                case 'S': y -= 1; break;
+                case 'E': x += 1; break;
+                case 'W': x -= 1; break;
+                default: return -1;
+            }
+            // cout << c << "::" << x << ", " << y << endl;
+            string key = to_string(x) + "-" + to_string(y);
+            if(visited.find(key) != visited.end()){
+                return true;
+            }
+            visited.insert(key);
         }
         return false;
     }
