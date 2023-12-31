@@ -28,6 +28,7 @@ public:
     */
 
     // Better Approach
+    /*
     int maxLengthBetweenEqualCharacters(string s) {
         // Optimal approach
         int ans = -1;
@@ -44,6 +45,25 @@ public:
         }
         return ans;
     }
+    */
     // THe above approach can be tweaked for getting more optimised in space, like for example adding vector reduces space by a little...
     // Adding short instead of int... etc
+
+    int maxLengthBetweenEqualCharacters(string &s) {
+        // Optimal approach
+        short ans = -1;
+        vector<short> index(26, -1);
+
+        for(short i=0; i<s.size(); i++) {
+            short key = s[i] - 'a';
+            if(index[key] != -1) {
+                // Adding ans - 0 causes explicit type casting hence max() works
+                short res = i - index[key] - 1;
+                if(ans < res) ans = res;
+            } else {
+                index[key] = i;
+            }
+        }
+        return ans;
+    }
 };
