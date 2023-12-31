@@ -1,5 +1,7 @@
 class Solution {
 public:
+    // Brute Force Approach
+    /*
     int maxLengthBetweenEqualCharacters(string s) {
         // Brute force approach
         // Remember to use (int) before comparing ans with temp.size()... brings out all sorts of errors
@@ -23,4 +25,25 @@ public:
         // return ans > 0 ? ans : -1;
         return ans;
     }
+    */
+
+    // Better Approach
+    int maxLengthBetweenEqualCharacters(string s) {
+        // Optimal approach
+        int ans = -1;
+        unordered_map<char, int> index;
+
+        for(int i=0; i<s.size(); i++) {
+            if(index.find(s[i]) != index.end()) {
+                // Already been through this character once
+                // Find characters between the first appearance of this character and this index
+                ans = max(ans, abs(i - index[s[i]]) - 1);
+            } else {
+                index[s[i]] = i;
+            }
+        }
+        return ans;
+    }
+    // THe above approach can be tweaked for getting more optimised in space, like for example adding vector reduces space by a little...
+    // Adding short instead of int... etc
 };
