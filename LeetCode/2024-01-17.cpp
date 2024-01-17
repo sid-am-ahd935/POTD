@@ -21,6 +21,7 @@ public:
 };
 
 // Efficient memory 
+/*
 class Solution {
 public:
     bool uniqueOccurrences(vector<int>& arr) {
@@ -41,6 +42,37 @@ public:
             if (ans[i] == ans [i+1])
                 return false;
         }
+        return true;
+    }
+};
+*/
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) {
+        vector<int> No_count;
+        int count=1 ;
+        sort(arr.begin(),arr.end());
+        for(int i=0;i<arr.size();i=i+count){ 
+            count=1;
+            for(int j=i+1;j<arr.size();j++){
+                if(arr[i]==arr[j] ){
+                    
+                    count++;
+                } 
+            }
+           
+            No_count.push_back(count);
+        }
+
+       sort( No_count.begin(),No_count.end());
+        for(int i=0;i<No_count.size();i++){
+            for(int j=i+1;j<No_count.size();j++){
+                if(No_count[i]==No_count[j]){
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 };
